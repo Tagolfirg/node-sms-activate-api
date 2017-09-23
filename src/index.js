@@ -64,6 +64,16 @@ class SmsActivate {
     return res;
   }
 
+  async getStatus(id: string | number): Promise<string> {
+    const res = await this._method('getStatus', { id });
+
+    const match = res.match('STATUS');
+
+    if (!match) throw new Error(res);
+
+    return res;
+  }
+
   /**
    * @async
    * @private
