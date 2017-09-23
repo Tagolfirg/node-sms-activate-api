@@ -29,11 +29,38 @@ class SmsActivate {
     return parseFloat(match[1]);
   }
 
-  async _method(method: string, opts?: Object): Promise<string> {
-    const req = Object.assign(opts || {}, {
+  async getNumber(
+    service: string,
+    options?: {
+      forward?: 0 | 1,
+      operator?: string,
+      ref?: string,
+      country?: number
+    } = {}
+  ): Promise<{ id: string, number: string }> {
+
+    const res = await this._method('getNumber', { service, ...options });
+
+    const match = res.match(/ACCESS_NUMBER:(.+?):(.+)/);
+
+    if (!match) throw new Error(res);
+
+    return { id: match[1], number: match[2] };
+  }
+
+  /**
+   * @async
+   * @private
+   * @arg {string} method Method name
+   * @arg {object} [opts] Options
+   * @return {Promise<string>} Response
+   */
+  async _method(method: string, opts?: Object = {}): Promise<string> {
+    const req = {
+      ...opts,
       api_key: this._apikey,
       action: method
-    });
+    };
 
     if (SmsActivate.DEBUG) console.log('SmsActivate Request:', req);
 
