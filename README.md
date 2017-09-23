@@ -1,3 +1,5 @@
+[![npm](https://img.shields.io/npm/v/node-sms-activate-api.svg?style=flat-square)](https://www.npmjs.com/package/node-sms-activate-api) [![license](https://img.shields.io/github/license/Bannerets/node-sms-activate-api.svg?style=flat-square)](https://github.com/Bannerets/node-sms-activate-api)
+
 # sms-activate.ru API
 
 API Documentation: <http://sms-activate.ru/index.php?act=api>
