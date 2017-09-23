@@ -4,9 +4,10 @@
   "description": "sms-activate.ru API",
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint src --max-warnings 0",
     "build": "babel src/ -d lib/",
-    "prepublish": "npm run lint && npm run build"
+    "prepublish": "npm run lint && npm run build",
+    "precommit": "npm run prepublish"
   },
   "files": [
     "lib"
@@ -23,7 +24,8 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "eslint": "^4.7.2",
-    "eslint-plugin-flowtype": "^2.35.1"
+    "eslint-plugin-flowtype": "^2.35.1",
+    "husky": "^0.14.3"
   },
   "dependencies": {
     "request": "^2.82.0",
