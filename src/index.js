@@ -48,6 +48,22 @@ class SmsActivate {
     return { id: match[1], number: match[2] };
   }
 
+  async setStatus(
+    id: string | number,
+    status: number,
+    forward?: string | number
+  ): Promise<string> {
+    const opts = { id, status, ...(forward ? { forward } : {}) };
+
+    const res = await this._method('setStatus', opts);
+
+    const match = res.match('ACCESS');
+
+    if (!match) throw new Error(res);
+
+    return res;
+  }
+
   /**
    * @async
    * @private
