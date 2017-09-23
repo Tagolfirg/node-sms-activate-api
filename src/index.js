@@ -19,6 +19,16 @@ class SmsActivate {
     if (url) this._url = url;
   }
 
+  async getBalance(): Promise<number> {
+    const res = await this._method('getBalance');
+
+    const match = res.match(/ACCESS_BALANCE:(.+)/);
+
+    if (!match) throw new Error(res);
+
+    return parseFloat(match[1]);
+  }
+
   async _method(method: string, opts?: Object): Promise<string> {
     const req = Object.assign(opts || {}, {
       api_key: this._apikey,
