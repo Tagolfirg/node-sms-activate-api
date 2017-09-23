@@ -74,6 +74,31 @@ class SmsActivate {
     return res;
   }
 
+  // ------
+
+  async getCode(id: string | number): Promise<string | void> {
+    await this.setStatus(id, 1);
+
+    try {
+      while (true) {
+        const status: string = await this.getStatus(id);
+
+        const okmatch = status.match(/STATUS_OK:(.+)/);
+
+        if (okmatch) return okmatch[1];
+
+        const waitmatch = status.match(/STATUS_WAIT_CODE/);
+        if (!waitmatch) throw new Error(status);
+
+        await sleep(1000);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  // ------
+
   /**
    * @async
    * @private
@@ -102,3 +127,7 @@ class SmsActivate {
 }
 
 module.exports = SmsActivate;
+
+function sleep(time: number) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
