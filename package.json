@@ -5,7 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src --max-warnings 0",
-    "build": "babel src/ -d lib/",
+    "build:babel": "babel src/ -d lib/",
+    "build:flow": "flow-copy-source src lib",
+    "build": "npm run build:babel && npm run build:flow",
     "prepublish": "npm run lint && npm run build",
     "prepush": "npm run prepublish"
   },
@@ -26,6 +28,7 @@
     "babel-preset-flow": "^6.23.0",
     "eslint": "^4.7.2",
     "eslint-plugin-flowtype": "^2.35.1",
+    "flow-copy-source": "^1.2.1",
     "husky": "^0.14.3"
   },
   "dependencies": {
