@@ -1,6 +1,6 @@
 {
   "name": "node-sms-activate-api",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "sms-activate.ru API",
   "main": "lib/index.js",
   "scripts": {
