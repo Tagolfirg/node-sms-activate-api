@@ -106,7 +106,7 @@ class SmsActivate {
    * @async
    * @private
    * @arg {string} method Method name
-   * @arg {object} [opts] Options
+   * @arg {Object} [opts] Options
    * @return {Promise<string>} Response
    */
   async _method(method: string, opts?: Object = {}): Promise<string> {
