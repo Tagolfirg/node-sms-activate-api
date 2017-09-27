@@ -76,25 +76,28 @@ class SmsActivate {
 
   // ------
 
-  async getCode(id: string | number): Promise<string | void> {
+  async getCode(id: string | number): Promise<string> {
     await this.setStatus(id, 1);
 
-    try {
-      while (true) {
-        const status: string = await this.getStatus(id);
+    let code = '';
 
-        const okmatch = status.match(/STATUS_OK:(.+)/);
+    while (true) {
+      const status: string = await this.getStatus(id);
 
-        if (okmatch) return okmatch[1];
+      const okmatch = status.match(/STATUS_OK:(.+)/);
 
-        const waitmatch = status.match(/STATUS_WAIT_CODE/);
-        if (!waitmatch) throw new Error(status);
-
-        await sleep(1000);
+      if (okmatch) {
+        code = okmatch[1];
+        break;
       }
-    } catch (e) {
-      throw e;
+
+      const waitmatch = status.match(/STATUS_WAIT_CODE/);
+      if (!waitmatch) throw new Error(status);
+
+      await sleep(1000);
     }
+
+    return code;
   }
 
   // ------
@@ -128,6 +131,6 @@ class SmsActivate {
 
 module.exports = SmsActivate;
 
-function sleep(time: number) {
+function sleep(time: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
