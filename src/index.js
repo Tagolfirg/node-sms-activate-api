@@ -1,6 +1,6 @@
-/* @flow */
+// @flow
 
-const requestp: Function = require('request-promise');
+const requestp: (*) => Promise<*> = require('request-promise');
 
 class SmsActivate {
   static DEBUG = false;
