@@ -1,6 +1,6 @@
 // @flow
 
-const requestp: (*) => Promise<*> = require('request-promise');
+const axios = require('axios');
 
 class SmsActivate {
   static DEBUG = false;
@@ -118,14 +118,15 @@ class SmsActivate {
 
     if (SmsActivate.DEBUG) console.log('SmsActivate Request:', req);
 
-    const res: string = await requestp({
-      uri: this._url,
-      qs: req
+    const res = await axios.get(this._url, {
+      params: req
     });
 
-    if (SmsActivate.DEBUG) console.log('SmsActivate Response:', res);
+    const data: string = res.data;
 
-    return res;
+    if (SmsActivate.DEBUG) console.log('SmsActivate Response:', data);
+
+    return data;
   }
 }
 

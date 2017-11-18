@@ -10,8 +10,9 @@
     "build:babel": "babel src/ -d lib/",
     "build:flow-copy": "flow-copy-source src lib",
     "build": "npm run build:babel && npm run build:flow-copy",
-    "prepublish": "npm test && npm run build",
-    "prepush": "npm run prepublish"
+    "prepublish": "flow-typed update && npm run build",
+    "prepublishOnly": "npm test",
+    "prepush": "npm run prepublish && npm test"
   },
   "files": [
     "lib"
@@ -22,8 +23,7 @@
   "author": "Bannerets <save14@protonmail.com>",
   "license": "MIT",
   "dependencies": {
-    "request": "^2.82.0",
-    "request-promise": "^4.2.2"
+    "axios": "^0.17.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -36,6 +36,7 @@
     "eslint-plugin-flowtype": "^2.35.1",
     "flow-bin": "^0.57.3",
     "flow-copy-source": "^1.2.1",
+    "flow-typed": "^2.2.3",
     "husky": "^0.14.3"
   },
   "keywords": [
